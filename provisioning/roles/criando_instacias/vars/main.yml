@@ -1,0 +1,9 @@
+---
+# vars file for criando_instacias
+sec_group_name: giropops
+profile: wd
+region: us-east-1
+instance_type: t3.medium
+image: ami-0dba2cb6798deb6d8
+keypair: cp1908
+count: 3

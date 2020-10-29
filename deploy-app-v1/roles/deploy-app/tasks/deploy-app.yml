@@ -1,0 +1,29 @@
+- name: add dir app giropops
+  file: path={{item}} state=directory
+  with_items:
+    - /apt/giropops
+    - /apt/giropops/logs
+    - /apt/giropops/conf
+
+- name: Cpiando arquivo de app para o host
+  template:
+    src: app-v1.yml.j2
+    dest: /apt/giropops/app-v1.yml
+    owner: root
+    group: root
+    mode: 0644
+  register: copiando_template
+
+- name:  Copiando arquivo de svc do app para host
+  copy: src={{ item.src }} dest={{ item.dest}}
+  with_items:
+    - { src: 'service_app.yml', dest: '/apt/giropops/service_app.yml'}
+  register: copiando_service_file
+
+- name: Executando deploy app giropops
+  shell: kubectl apply -f /apt/giropops/app-v1.yml
+  register: deploy_app
+
+- name: Executando deploy svc giropops
+  shell: kubectl apply -f /apt/giropops/service_app.yml
+  register: deploy_svc
