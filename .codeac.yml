@@ -3,7 +3,7 @@ version: '1'
 tools:
   ansibleLint:
     files:
-      - deploy-app-v1/roles/deploy-app**/*.yml
+      - deploy-app-v1/roles/deploy-app/**/*.yml
       - deploy-app-v2/**/*.yml
       - install_k8s/**/*.yml
       - provisioning/**/*.yml
